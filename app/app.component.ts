@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
+import { ROUTER_DIRECTIVES } from '@angular/router';
+import { GAMES } from './global/data/games.data';
 
-@Component({
+@Component ( {
+    directives: [ROUTER_DIRECTIVES],
     selector: 'my-app',
-    template: '<h1>My First Angular 2 App</h1>'
+    templateUrl: 'app/global/static/html/app.component.html'
 })
-export class AppComponent { }
+export class AppComponent {
+    games = GAMES;
+};
