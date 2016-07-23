@@ -1,5 +1,6 @@
 
 import { BEJEWELED_SETTINGS } from '../data/settings.data';
+import { BoardLocation } from './board-location';
 
 export class BejeweledGameBoard {
 
@@ -75,15 +76,96 @@ export class BejeweledGameBoard {
         }
         return collapseRecord;
     }
-    hasMoves ()
+    /**
+     * Checks the gem type at a given board location.
+     * @param   {BoardLocation} location The location to check
+     * @returns {number}        The gem type at that location
+     */
+    checkLocation ( location: BoardLocation )
     {
-        for ( var i = 0; i < 6; ++i )
+        if ( ( location.x > 7 ) || ( location.x < 0 ) ) return -1;
+        if ( ( location.y > 7 ) || ( location.y < 0 ) ) return -1;
+        return this.board [location.y] [location.x];
+    }
+    checkLocationForCollapse ( location: BoardLocation, gemType: number,
+        fromDirection: string )
+    {
+
+        if ( checkLocation ( location ) == -1 ) return false;
+        var copyLocation = location.copy ();
+
+        var horizontalCount: number = 1;
+        var verticalCount: number = 1;
+
+        // check for vertical collapse
+        if ( fromDirection != 'up' )
         {
-            for ( var j = 0; j < 6; ++j )
+            location = copyLocation.up ()
+            while ( this.checkLocation ( location ) == gemType )
             {
-                var a = 1;
+                location = location.up ();
+                ++verticalCount;
             }
         }
+        if ( fromDirection != 'down' )
+        {
+            location = copyLocation.down ()
+            while ( this.checkLocation ( location ) == gemType )
+            {
+                location = location.down ();
+                ++verticalCount;
+            }
+        }
+        if ( verticalCount >= 3 ) return true;
+        if ( fromDirection != 'left' )
+        {
+            location = copyLocation.left ()
+            while ( this.checkLocation ( location ) == gemType )
+            {
+                location = location.left ();
+                ++horizontalCount;
+            }
+        }
+        if ( fromDirection != 'right' )
+        {
+            location = copyLocation.right ()
+            while ( this.checkLocation ( location ) == gemType )
+            {
+                location = location.right ();
+                ++horizontalCount;
+            }
+        }
+        if ( horizontalCount >= 3 ) return true;
+
+        return false;
+    }
+    /**
+     * Checks if the game board has possible moves or not.
+     * @returns {boolean} True if the board has moves, otherwise false
+     */
+    hasMoves ()
+    {
+
+        for ( var i = 0; i < 8; ++i )
+        {
+            for ( var j = 0; j < 8; ++j )
+            {
+
+                var currentGemType = this.board [i] [j];
+                var currentGemLocation = new BoardLocation ( j, i );
+
+                if ( checkLocationForCollapse ( currentGemLocation.up (),
+                    currentGemType, 'down' ) ) return true;
+                if ( checkLocationForCollapse ( currentGemLocation.down (),
+                    currentGemType, 'up' ) ) return true;
+                if ( checkLocationForCollapse ( currentGemLocation.left (),
+                    currentGemType, 'right' ) ) return true;
+                if ( checkLocationForCollapse ( currentGemLocation.right (),
+                    currentGemType, 'left' ) ) return true;
+            }
+        }
+
+        return false;
     }
     initialize () {
 
