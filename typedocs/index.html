@@ -65,111 +65,9 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="angular-2-quickstart-source">Angular 2 QuickStart Source</h1>
-				<p>This repository holds the TypeScript source code of the <a href="https://angular.io/docs/ts/latest/quickstart.html">angular.io quickstart</a>,
-				the foundation for most of the documentation samples and potentially a good starting point for your application.</p>
-				<p>It&#39;s been extended with testing support so you can start writing tests immediately.</p>
-				<p><strong>This is not the perfect arrangement for your application. It is not designed for production.
-				It exists primarily to get you started quickly with learning and prototyping in Angular 2</strong></p>
-				<p>We are unlikely to accept suggestions about how to grow this QuickStart into something it is not.
-				Please keep that in mind before posting issues and PRs.</p>
-				<h2 id="prerequisites">Prerequisites</h2>
-				<p>Node.js and npm are essential to Angular 2 development. </p>
-				<p><a href="https://docs.npmjs.com/getting-started/installing-node" target="_blank" title="Installing Node.js and updating npm">
-				Get it now</a> if it&#39;s not already installed on your machine.</p>
-				<p><strong>Verify that you are running at least node <code>v5.x.x</code> and npm <code>3.x.x</code></strong>
-					by running <code>node -v</code> and <code>npm -v</code> in a terminal/console window.
-				Older versions produce errors.</p>
-				<p>We recommend <a href="https://github.com/creationix/nvm">nvm</a> for managing multiple versions of node and npm.</p>
-				<h2 id="create-a-new-project-based-on-the-quickstart">Create a new project based on the QuickStart</h2>
-				<p>Clone this repo into new project folder (e.g., <code>my-proj</code>).</p>
-				<pre><code class="lang-bash">git <span class="hljs-built_in">clone</span>  https://github.com/angular/quickstart  my-proj
-<span class="hljs-built_in">cd</span> my-proj
+				<h2 id="generating-documentation">Generating Documentation</h2>
+				<pre><code><span class="hljs-comment">typedoc</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">mode</span> <span class="hljs-comment">modules</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">out</span> <span class="hljs-comment">typedocs</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">tsconfig</span> <span class="hljs-comment">tsconfig</span><span class="hljs-string">.</span><span class="hljs-comment">json</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">ignoreCompilerErrors</span> <span class="hljs-comment">app/</span>
 </code></pre>
-				<p>We have no intention of updating the source on <code>angular/quickstart</code>.
-				Discard everything &quot;git-like&quot; by deleting the <code>.git</code> folder.</p>
-				<pre><code class="lang-bash">rm -rf .git  // non-Windows
-rd .git /S/Q // windows
-</code></pre>
-				<h3 id="create-a-new-git-repo">Create a new git repo</h3>
-				<p>You could <a href="#start-development">start writing code</a> now and throw it all away when you&#39;re done.
-				If you&#39;d rather preserve your work under source control, consider taking the following steps.</p>
-				<p>Initialize this project as a <em>local git repo</em> and make the first commit:</p>
-				<pre><code class="lang-bash">git init
-git add .
-git commit -m <span class="hljs-string">"Initial commit"</span>
-</code></pre>
-				<p>Create a <em>remote repository</em> for this project on the service of your choice.</p>
-				<p>Grab its address (e.g. <em><code>https://github.com/&lt;my-org&gt;/my-proj.git</code></em>) and push the <em>local repo</em> to the <em>remote</em>.</p>
-				<pre><code class="lang-bash">git remote add origin &lt;repo-address&gt;
-git push -u origin master
-</code></pre>
-				<h2 id="install-npm-packages">Install npm packages</h2>
-				<blockquote>
-					<p>See npm and nvm version notes above</p>
-				</blockquote>
-				<p>Install the npm packages described in the <code>package.json</code> and verify that it works:</p>
-				<p><strong>Attention Windows Developers:  You must run all of these commands in administrator mode</strong>.</p>
-				<pre><code class="lang-bash">npm install
-npm start
-</code></pre>
-				<blockquote>
-					<p>If the <code>typings</code> folder doesn&#39;t show up after <code>npm install</code> please install them manually with:</p>
-					<p><code>npm run typings -- install</code></p>
-				</blockquote>
-				<p>The <code>npm start</code> command first compiles the application,
-					then simultaneously re-compiles and runs the <code>lite-server</code>.
-				Both the compiler and the server watch for file changes.</p>
-				<p>Shut it down manually with Ctrl-C.</p>
-				<p>You&#39;re ready to write your application.</p>
-				<h3 id="npm-scripts">npm scripts</h3>
-				<p>We&#39;ve captured many of the most useful commands in npm scripts defined in the <code>package.json</code>:</p>
-				<ul>
-					<li><code>npm start</code> - runs the compiler and a server at the same time, both in &quot;watch mode&quot;.</li>
-					<li><code>npm run tsc</code> - runs the TypeScript compiler once.</li>
-					<li><code>npm run tsc:w</code> - runs the TypeScript compiler in watch mode; the process keeps running, awaiting changes to TypeScript files and re-compiling when it sees them.</li>
-					<li><code>npm run lite</code> - runs the <a href="https://www.npmjs.com/package/lite-server">lite-server</a>, a light-weight, static file server, written and maintained by
-						<a href="https://github.com/johnpapa">John Papa</a> and
-						<a href="https://github.com/cgmartin">Christopher Martin</a>
-					with excellent support for Angular apps that use routing.</li>
-					<li><code>npm run typings</code> - runs the typings tool.</li>
-					<li><code>npm run postinstall</code> - called by <em>npm</em> automatically <em>after</em> it successfully completes package installation. This script installs the TypeScript definition files this app requires.
-					Here are the test related scripts:</li>
-					<li><code>npm test</code> - compiles, runs and watches the karma unit tests</li>
-					<li><code>npm run e2e</code> - run protractor e2e tests, written in JavaScript (*e2e-spec.js)</li>
-				</ul>
-				<h2 id="testing">Testing</h2>
-				<p>The QuickStart documentation doesn&#39;t discuss testing.
-				This repo adds both karma/jasmine unit test and protractor end-to-end testing support.</p>
-				<p>These tools are configured for specific conventions described below.</p>
-				<p><em>It is unwise and rarely possible to run the application, the unit tests, and the e2e tests at the same time.
-				We recommend that you shut down one before starting another.</em></p>
-				<h3 id="unit-tests">Unit Tests</h3>
-				<p>TypeScript unit-tests are usually in the <code>app</code> folder. Their filenames must end in <code>.spec</code>.</p>
-				<p>Look for the example <code>app/app.component.spec.ts</code>.
-				Add more <code>.spec.ts</code> files as you wish; we configured karma to find them.</p>
-				<p>Run it with <code>npm test</code></p>
-				<p>That command first compiles the application, then simultaneously re-compiles and runs the karma test-runner.
-				Both the compiler and the karma watch for (different) file changes.</p>
-				<p>Shut it down manually with Ctrl-C.</p>
-				<p>Test-runner output appears in the terminal window.
-					We can update our app and our tests in real-time, keeping a weather eye on the console for broken tests.
-					Karma is occasionally confused and it is often necessary to shut down its browser or even shut the command down (Ctrl-C) and
-				restart it. No worries; it&#39;s pretty quick.</p>
-				<p>The <code>HTML-Reporter</code> is also wired in. That produces a prettier output; look for it in <code>~_test-output/tests.html</code>.</p>
-				<h3 id="end-to-end-e2e-tests">End-to-end (E2E) Tests</h3>
-				<p>E2E tests are in the <code>e2e</code> directory, side by side with the <code>app</code> folder.
-				Their filenames must end in <code>.e2e-spec.ts</code>.</p>
-				<p>Look for the example <code>e2e/app.e2e-spec.ts</code>.
-					Add more <code>.e2e-spec.js</code> files as you wish (although one usually suffices for small projects);
-				we configured protractor to find them.</p>
-				<p>Thereafter, run them with <code>npm run e2e</code>.</p>
-				<p>That command first compiles, then simultaneously starts the Http-Server at <code>localhost:8080</code>
-				and launches protractor.  </p>
-				<p>The pass/fail test results appear at the bottom of the terminal window.
-					A custom reporter (see <code>protractor.config.js</code>) generates a  <code>./_test-output/protractor-results.txt</code> file
-				which is easier to read; this file is excluded from source control.</p>
-				<p>Shut it down manually with Ctrl-C.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
@@ -195,6 +93,9 @@ npm start
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_bejeweled_models_bejeweled_game_board_.html">"bejeweled/models/bejeweled-<wbr>game-<wbr>board"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bejeweled_models_bejeweled_game_state_.html">"bejeweled/models/bejeweled-<wbr>game-<wbr>state"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_bejeweled_models_board_location_.html">"bejeweled/models/board-<wbr>location"</a>

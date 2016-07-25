@@ -70,7 +70,8 @@ export class GemService {
         return shape;
     }
 
-    getGem ( n: number, x: number, y: number ) {
+    getGem ( n: number, x: number, y: number )
+    {
         switch ( n )
         {
             case 1: return this.makeRedPentagon ( x, y );
@@ -81,5 +82,14 @@ export class GemService {
             case 6: return this.makeYellowHex ( x, y );
             default: return this.makePurpleDiamond ( x, y );
         }
+    }
+    getSelectionMarker ( x: number, y: number )
+    {
+        var marker = new createjs.Shape ();
+        marker.graphics.beginFill ( '#fff' ).drawCircle ( x + 2, y + 2, 2 );
+        marker.graphics.beginFill ( '#fff' ).drawCircle ( x + 48, y + 2, 2 );
+        marker.graphics.beginFill ( '#fff' ).drawCircle ( x + 48, y + 48, 2 );
+        marker.graphics.beginFill ( '#fff' ).drawCircle ( x + 2, y + 48, 2 );
+        return marker;
     }
 }

@@ -87,11 +87,19 @@ export class BejeweledGameBoard {
         if ( ( location.y > 7 ) || ( location.y < 0 ) ) return -1;
         return this.board [location.y] [location.x];
     }
+    /**
+     * Checks a given location to see if a collapse would occur if a given
+     * gem type was moved to it from that direction.
+     * @param   {BoardLocation} location      The location to check
+     * @param   {number}        gemType       The gem type number
+     * @param   {string}        fromDirection The direction from which the gem would be moved, either 'up', 'down', 'left', or 'right'
+     * @returns {boolean}       True if the gem move would trigger a collapse, false otherwise.
+     */
     checkLocationForCollapse ( location: BoardLocation, gemType: number,
         fromDirection: string )
     {
 
-        if ( checkLocation ( location ) == -1 ) return false;
+        if ( this.checkLocation ( location ) == -1 ) return false;
         var copyLocation = location.copy ();
 
         var horizontalCount: number = 1;
@@ -154,13 +162,13 @@ export class BejeweledGameBoard {
                 var currentGemType = this.board [i] [j];
                 var currentGemLocation = new BoardLocation ( j, i );
 
-                if ( checkLocationForCollapse ( currentGemLocation.up (),
+                if ( this.checkLocationForCollapse ( currentGemLocation.up (),
                     currentGemType, 'down' ) ) return true;
-                if ( checkLocationForCollapse ( currentGemLocation.down (),
+                if ( this.checkLocationForCollapse ( currentGemLocation.down (),
                     currentGemType, 'up' ) ) return true;
-                if ( checkLocationForCollapse ( currentGemLocation.left (),
+                if ( this.checkLocationForCollapse ( currentGemLocation.left (),
                     currentGemType, 'right' ) ) return true;
-                if ( checkLocationForCollapse ( currentGemLocation.right (),
+                if ( this.checkLocationForCollapse ( currentGemLocation.right (),
                     currentGemType, 'left' ) ) return true;
             }
         }
