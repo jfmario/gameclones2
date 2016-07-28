@@ -22,5 +22,8 @@ export class BoardLocation {
     public down () { return new BoardLocation ( this.y + 1, this.x ); }
     public left () { return new BoardLocation ( this.y, this.x - 1 ); }
     public right () { return new BoardLocation ( this.y, this.x + 1 ); }
-
+    public toString (): string
+    {
+        return "BoardLocation{ x: " + this.x + ", y: " + this.y + " }";
+    }
 }

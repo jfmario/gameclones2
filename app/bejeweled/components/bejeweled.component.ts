@@ -34,8 +34,8 @@ export class BejeweledComponent implements OnInit {
     private eventToBoardLocation ( event: any )
     {
 
-        var x: number = parseInt ( event.stageX / 50 );
-        var y: number = parseInt ( event.stageY / 50 );
+        var x: number = Math.floor ( event.stageX / 50 );
+        var y: number = Math.floor ( event.stageY / 50 );
 
         return new BoardLocation ( x, y );
     }
@@ -65,6 +65,8 @@ export class BejeweledComponent implements OnInit {
             if ( this.chosenGemLocation.isAdjacent ( location ) )
             {
                 // Why does direction always say up???
+                // alert ( this.chosenGemLocation.toString () );
+                alert ( location.toString () );
                 var direction = 'up';
                 if ( location.down ().isEqual ( this.chosenGemLocation ) )
                     direction = 'down';
