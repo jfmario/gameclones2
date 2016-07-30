@@ -75,12 +75,19 @@ export class BejeweledComponent implements OnInit {
                 if ( location.right ().isEqual ( this.chosenGemLocation ) )
                     direction = 'right';
 
-                console.log ( this.board.checkLocationForCollapse ( location,
-                    this.chosenGemType, direction ) );
-                console.log ( this.board.checkLocationForCollapse (
+                var isValid1 = this.board.checkLocationForCollapse ( location,
+                    this.chosenGemType, direction );
+                var isValid2 = this.board.checkLocationForCollapse (
                     this.chosenGemLocation,
                     this.board.checkLocation ( location ),
-                    DIRECTION_OPPOSITES [direction] ) );
+                    DIRECTION_OPPOSITES [direction] );
+                var isValid = isValid1 || isValid2;
+
+                if ( isValid )
+                {
+                    createjs.Tween.get ( this.chosenGem ).to ( { x: 0, y: 50 },
+                        1000 );
+                }
             }
             else
             {
@@ -126,6 +133,10 @@ export class BejeweledComponent implements OnInit {
             }
         }
 
+        createjs.Ticker.addEventListener ( 'tick', function ()
+        {
+            self.stage.update ();
+        });
         this.state = BejeweledGameState.AWAITING_SELECT;
         this.stage.update ();
     }
