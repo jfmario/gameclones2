@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { BEJEWELED_SETTINGS } from '../data/settings.data';
+import { DIRECTION_MOVES } from '../data/direction_moves.data';
 import { DIRECTION_OPPOSITES } from '../data/direction_opposites.data';
 import { BejeweledGameBoard } from '../models/bejeweled-game-board';
 import { BejeweledGameState } from '../models/bejeweled-game-state';
@@ -85,8 +86,12 @@ export class BejeweledComponent implements OnInit {
 
                 if ( isValid )
                 {
-                    createjs.Tween.get ( this.chosenGem ).to ( { x: 0, y: 50 },
-                        1000 );
+                    var otherGem = this.drawBoard [location.y] [location.x];
+                    createjs.Tween.get ( this.chosenGem ).to (
+                        DIRECTION_MOVES [direction], 300 );
+                    createjs.Tween.get ( otherGem ).to (
+                        DIRECTION_MOVES [ DIRECTION_OPPOSITES [direction] ],
+                        300 );
                 }
             }
             else
