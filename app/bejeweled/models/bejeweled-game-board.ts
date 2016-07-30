@@ -81,7 +81,7 @@ export class BejeweledGameBoard {
      * @param   {BoardLocation} location The location to check
      * @returns {number}        The gem type at that location
      */
-    checkLocation ( location: BoardLocation )
+    checkLocation ( location: BoardLocation ): number
     {
         if ( ( location.x > 7 ) || ( location.x < 0 ) ) return -1;
         if ( ( location.y > 7 ) || ( location.y < 0 ) ) return -1;
@@ -96,7 +96,7 @@ export class BejeweledGameBoard {
      * @returns {boolean}       True if the gem move would trigger a collapse, false otherwise.
      */
     checkLocationForCollapse ( location: BoardLocation, gemType: number,
-        fromDirection: string )
+        fromDirection: string ): boolean
     {
 
         if ( this.checkLocation ( location ) == -1 ) return false;
@@ -108,7 +108,7 @@ export class BejeweledGameBoard {
         // check for vertical collapse
         if ( fromDirection != 'up' )
         {
-            location = copyLocation.up ()
+            location = copyLocation.up ();
             while ( this.checkLocation ( location ) == gemType )
             {
                 location = location.up ();

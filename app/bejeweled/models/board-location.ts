@@ -3,7 +3,7 @@ export class BoardLocation {
 
     constructor ( public x: number, public y: number ) {}
 
-    public copy () { return new BoardLocation ( this.y, this.x ); }
+    public copy () { return new BoardLocation ( this.x, this.y ); }
     public isAdjacent ( otherLocation: BoardLocation ): boolean
     {
 
@@ -18,10 +18,10 @@ export class BoardLocation {
     {
         return ( ( this.x == otherLocation.x ) && ( this.y == otherLocation.y ) );
     }
-    public up () { return new BoardLocation ( this.y - 1, this.x ); }
-    public down () { return new BoardLocation ( this.y + 1, this.x ); }
-    public left () { return new BoardLocation ( this.y, this.x - 1 ); }
-    public right () { return new BoardLocation ( this.y, this.x + 1 ); }
+    public up () { return new BoardLocation ( this.x, this.y - 1 ); }
+    public down () { return new BoardLocation ( this.x, this.y + 1 ); }
+    public left () { return new BoardLocation ( this.x - 1, this.y ); }
+    public right () { return new BoardLocation ( this.x + 1, this.y ); }
     public toString (): string
     {
         return "BoardLocation{ x: " + this.x + ", y: " + this.y + " }";

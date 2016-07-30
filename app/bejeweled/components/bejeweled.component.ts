@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { BEJEWELED_SETTINGS } from '../data/settings.data';
+import { DIRECTION_OPPOSITES } from '../data/direction_opposites.data';
 import { BejeweledGameBoard } from '../models/bejeweled-game-board';
 import { BejeweledGameState } from '../models/bejeweled-game-state';
 import { BoardLocation } from '../models/board-location';
@@ -64,9 +65,8 @@ export class BejeweledComponent implements OnInit {
             var location = this.eventToBoardLocation ( event );
             if ( this.chosenGemLocation.isAdjacent ( location ) )
             {
-                // Why does direction always say up???
+
                 // alert ( this.chosenGemLocation.toString () );
-                alert ( location.toString () );
                 var direction = 'up';
                 if ( location.down ().isEqual ( this.chosenGemLocation ) )
                     direction = 'down';
@@ -74,7 +74,13 @@ export class BejeweledComponent implements OnInit {
                     direction = 'left';
                 if ( location.right ().isEqual ( this.chosenGemLocation ) )
                     direction = 'right';
-                alert ( direction );
+
+                console.log ( this.board.checkLocationForCollapse ( location,
+                    this.chosenGemType, direction ) );
+                console.log ( this.board.checkLocationForCollapse (
+                    this.chosenGemLocation,
+                    this.board.checkLocation ( location ),
+                    DIRECTION_OPPOSITES [direction] ) );
             }
             else
             {
