@@ -175,7 +175,8 @@ export class BejeweledGameBoard {
 
         return false;
     }
-    initialize () {
+    initialize ()
+    {
 
         for ( var i = 0; i < 8; ++i )
         {
@@ -192,5 +193,17 @@ export class BejeweledGameBoard {
 
         // get out of collapsible state
         while ( this.collapse ().length > 0 )continue;
+    }
+    /**
+     * Switches the gem types between the two given locations.
+     * @param {location1} BoardLocation The first location
+     * @param {location2} BoardLocation The second locaiton
+     */
+    switch ( location1: BoardLocation, location2: BoardLocation )
+    {
+        var temp: number = this.board [location1.y] [location1.x];
+        this.board [location1.y] [location1.x] = this.board [location2.y]
+            [location2.x];
+        this.board [location2.y] [location2.x] = temp;
     }
 }
