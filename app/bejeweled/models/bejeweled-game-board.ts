@@ -6,7 +6,7 @@ export class BejeweledGameBoard {
 
     public board: number [][] = [];
 
-    private collapse ()
+    collapse ()
     {
 
         var collapseRecord: any = [];

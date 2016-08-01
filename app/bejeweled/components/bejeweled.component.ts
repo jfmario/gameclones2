@@ -86,12 +86,30 @@ export class BejeweledComponent implements OnInit {
 
                 if ( isValid )
                 {
+
                     var otherGem = this.drawBoard [location.y] [location.x];
+                    this.drawBoard [location.y] [location.x] = this.drawBoard
+                        [this.chosenGemLocation.y] [this.chosenGemLocation.x];
+                    this.drawBoard [this.chosenGemLocation.y]
+                        [this.chosenGemLocation.x] = otherGem;
+                    this.board.switch ( this.chosenGemLocation, location );
+
                     createjs.Tween.get ( this.chosenGem ).to (
                         DIRECTION_MOVES [direction], 300 );
                     createjs.Tween.get ( otherGem ).to (
                         DIRECTION_MOVES [ DIRECTION_OPPOSITES [direction] ],
                         300 );
+
+                    var collapseRecord = this.board.collapse ();
+                    console.log ( collapseRecord );
+                    for ( var i = 0; i < collapseRecord.length; ++i )
+                    {
+                        console.log ( i );
+                        createjs.Tween.get ( this.drawBoard
+                            [collapseRecord[i][0]] [collapseRecord[i][1]] )
+                            .wait ( 400 )
+                            .to ( { alpha: 0 }, 100 );
+                    }
                 }
             }
             else
