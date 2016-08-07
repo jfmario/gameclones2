@@ -14,12 +14,14 @@ export class GemService {
         shape.graphics.beginFill ( '#00f' ).moveTo ( x + 25, y + 5 )
             .lineTo ( x + 45, y + 45 ).lineTo ( x + 5, y + 45 )
             .lineTo ( x + 25, y + 5 );
+        shape.jfmType = 3;
         return shape;
     }
     private makeGrayCircle ( x: number, y: number )
     {
         var shape = new createjs.Shape ();
         shape.graphics.beginFill ( '#888' ).drawCircle ( x + 25, y + 25, 20 );
+        shape.jfmType = 5;
         return shape;
     }
     private makeGreenX ( x: number, y: number )
@@ -35,12 +37,14 @@ export class GemService {
             .lineTo ( x + 5, y + 40 ).lineTo ( x + 20, y + 25 )
             .lineTo ( x + 5, y + 10 )
             .lineTo ( x + 10, y + 5 );
+        shape.jfmType = 2;
         return shape;
     }
     private makeOrangeSquare ( x: number, y: number )
     {
         var shape = new createjs.Shape ();
         shape.graphics.beginFill ( '#f80' ).drawRect ( x + 5, y + 5, 40, 40 );
+        shape.jfmType = 4;
         return shape;
     }
     private makePurpleDiamond ( x: number, y: number )
@@ -49,6 +53,7 @@ export class GemService {
         shape.graphics.beginFill ( '#80f' ).moveTo ( x + 5, y + 25 )
             .lineTo ( x + 25, y + 5 ).lineTo ( x + 45, y + 25 )
             .lineTo ( x + 25, y + 45 ).lineTo ( x + 5, y + 25 );
+        shape.jfmType = 7;
         return shape;
     }
     private makeRedPentagon ( x: number, y: number ) {
@@ -58,6 +63,7 @@ export class GemService {
             .lineTo ( x + 37, y + 45 )
             .lineTo ( x + 13, y + 45 ).lineTo ( x + 5, y + 25 )
             .lineTo ( x + 25, y + 5 );
+        shape.jfmType = 1;
         return shape;
     }
     private makeYellowHex ( x: number, y: number )
@@ -67,6 +73,7 @@ export class GemService {
             .lineTo ( x + 38, y + 5 ).lineTo ( x + 45, y + 25 )
             .lineTo ( x + 38, y + 45 ).lineTo ( x + 13, y + 45 )
             .lineTo ( x + 5, y + 25 ).lineTo ( x + 13, y + 5 );
+        shape.jfmType = 6;
         return shape;
     }
 

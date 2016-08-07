@@ -6,7 +6,7 @@ export class BejeweledGameBoard {
 
     public board: number [][] = [];
 
-    collapse ()
+    collapse (): any
     {
 
         var collapseRecord: any = [];
@@ -52,6 +52,8 @@ export class BejeweledGameBoard {
             this.board [collapseRecord[i][0]] [collapseRecord[i][1]] = 0;
         }
 
+        var fallRecord: any = [];
+        var newRecord: any = [];
         if ( collapseRecord.length > 0 )
         {
             // walk all gems down
@@ -63,18 +65,37 @@ export class BejeweledGameBoard {
                     {
                         if ( this.board [i] [j] == 0 )
                         {
-                            for ( var k = i; k > 0; --k )
-                                this.board [k] [j] =
-                                    this.board [ k - 1 ] [ j ];
-                            this.board [0] [j] = Math.floor (
-                                Math.random () *
-                                BEJEWELED_SETTINGS.NUMGEMTYPES ) + 1;
+                            var count0 = 0
+                            for ( var k = i; ( k > 0 ) && this.board [k] [j] == 0; --k )
+                            {
+                                ++count0;
+                            }
+                            for ( var l = k; l >= 0; --l )
+                            {
+                                this.board [l+count0] [j] = this.board [l] [j];
+                                fallRecord.push ( { source: { x:j, y:l },
+                                    dest: { x:j, y:l+count0 } } );
+                            }
+                            for ( var m = 0; m < count0; ++m )
+                            {
+                                 var newGemType = Math.floor (
+                                    Math.random () *
+                                    BEJEWELED_SETTINGS.NUMGEMTYPES ) + 1;
+                                this.board [m] [j] = newGemType;
+                                newRecord.push ( { loc: { x:j, y:m },
+                                    gemType: newGemType } );
+                            }
                         }
                     }
                 }
             }
         }
-        return collapseRecord;
+        console.log ( this.board );
+        return {
+            collapseRecord: collapseRecord,
+            fallRecord: fallRecord,
+            newRecord: newRecord,
+        }
     }
     /**
      * Checks the gem type at a given board location.
@@ -192,7 +213,7 @@ export class BejeweledGameBoard {
         }
 
         // get out of collapsible state
-        while ( this.collapse ().length > 0 )continue;
+        while ( this.collapse ().collapseRecord.length > 0 )continue;
     }
     /**
      * Switches the gem types between the two given locations.

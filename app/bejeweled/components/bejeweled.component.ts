@@ -94,22 +94,51 @@ export class BejeweledComponent implements OnInit {
                         [this.chosenGemLocation.x] = otherGem;
                     this.board.switch ( this.chosenGemLocation, location );
 
+                    // switch the gems
                     createjs.Tween.get ( this.chosenGem ).to (
                         DIRECTION_MOVES [direction], 300 );
                     createjs.Tween.get ( otherGem ).to (
                         DIRECTION_MOVES [ DIRECTION_OPPOSITES [direction] ],
                         300 );
 
-                    var collapseRecord = this.board.collapse ();
+                    var record = this.board.collapse ();
+                    var collapseRecord = record.collapseRecord;
+                    var fallRecord = record.fallRecord;
+                    var newRecord = record.newRecord;
+
                     console.log ( collapseRecord );
+                    // make the gems disappear
                     for ( var i = 0; i < collapseRecord.length; ++i )
                     {
-                        console.log ( i );
                         createjs.Tween.get ( this.drawBoard
                             [collapseRecord[i][0]] [collapseRecord[i][1]] )
                             .wait ( 400 )
                             .to ( { alpha: 0 }, 100 );
                     }
+
+                    // animate the collapse
+                    for ( var i = 0; i < fallRecord.length; ++i )
+                    {
+                        createjs.Tween.get ( this.drawBoard
+                            [fallRecord[i].source.y] [fallRecord[i].source.x] )
+                            .wait ( 500 )
+                            .to ( { y: 50 * ( fallRecord[i].dest.y -
+                                fallRecord[i].source.y ) }, 300 );
+                    }
+
+                    console.log ( newRecord );
+                    for ( var i = 0; i < newRecord.length; ++i )
+                    {
+                        var gem = this.gemService.getGem (
+                            newRecord [i].gemType, newRecord [i].loc.x * 50,
+                            newRecord [i].loc.y * 50 ) );
+                        gem.alpha = 0;
+                        this.stage.addChild ( gem );
+                        createjs.Tween.get ( gem ).wait ( 900 )
+                            .to ( { alpha: 1 } );
+                    }
+
+                    // must re initialize everything
                 }
             }
             else
