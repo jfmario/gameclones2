@@ -86,6 +86,7 @@ export class BejeweledComponent implements OnInit {
             self.resetDrawBoard ();
             self.state = BejeweledGameState.AWAITING_SELECT;
             self.animateCollapse ();
+            if ( !self.board.hasMoves() ) alert ( "It is finished." );
         }, 1100 );
     }
     private eventToBoardLocation ( event: any )
