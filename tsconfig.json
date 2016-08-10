@@ -10,5 +10,9 @@
     "noImplicitAny": true,
     "outDir": "app/global/static/js/",
     "suppressImplicitAnyIndexErrors": true
-  }
+  },
+  "exclude": [
+      "c9",
+      "node_modules"
+  ]
 }
