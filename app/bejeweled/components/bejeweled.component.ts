@@ -131,7 +131,7 @@ export class BejeweledComponent implements OnInit {
                     {
                         var gem = this.gemService.getGem (
                             newRecord [i].gemType, newRecord [i].loc.x * 50,
-                            newRecord [i].loc.y * 50 ) );
+                            newRecord [i].loc.y * 50 );
                         gem.alpha = 0;
                         this.stage.addChild ( gem );
                         createjs.Tween.get ( gem ).wait ( 900 )
