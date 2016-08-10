@@ -12,7 +12,13 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
+<<<<<<< HEAD
       ".c9",
       "node_modules"
     ]
+=======
+      "c9",
+      "node_modules"
+  ]
+>>>>>>> 19c2e8c2632df6bb59955cd87705767543012b7b
 }
