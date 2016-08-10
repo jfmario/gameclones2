@@ -33,10 +33,16 @@ export class BejeweledComponent implements OnInit {
 
     constructor ( private gemService: GemService ) {}
 
-    private animateCollapse ()
+    /**
+     * Collapses the board and resets the DrawBoard.
+     */
+    private animateCollapse (): Boolean
     {
         var record = this.board.collapse ();
         var collapseRecord = record.collapseRecord;
+
+        if ( collapseRecord.length == 0 ) return false;
+
         var fallRecord = record.fallRecord;
         var newRecord = record.newRecord;
 
@@ -79,6 +85,7 @@ export class BejeweledComponent implements OnInit {
         {
             self.resetDrawBoard ();
             self.state = BejeweledGameState.AWAITING_SELECT;
+            self.animateCollapse ();
         }, 1100 );
     }
     private eventToBoardLocation ( event: any )
